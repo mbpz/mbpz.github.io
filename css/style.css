@@ -35,16 +35,20 @@ body {
     margin: 0 auto 2rem;
     cursor: pointer;
     position: relative;
+    overflow: visible;
+    perspective: 200px;
 }
 
 .logo-window {
     width: 100%;
     height: 100%;
     transition: transform 0.3s ease;
+    overflow: visible;
+    transform-origin: 50% 50%;
 }
 
 .logo-container:hover .logo-window {
-    transform: scale(1.05);
+    transform: scale(1.0);
 }
 
 /* 窗口背景 */
@@ -76,48 +80,19 @@ body {
 
 /* 人物角色 */
 .character {
-    transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition: transform 0.4s ease-out;
+    /* 使用 viewBox 作为参考框 */
+    transform-box: view-box;
+    /* transform-origin 相对于 SVG viewBox (0 0 120 120)，人物在 (60, 75) */
     transform-origin: 60px 75px;
 }
 
 .logo-container:hover .character {
-    transform: translate(0, -25px) scale(1.1);
+    /* 只放大，不移动位置 */
+    transform: scale(1.1);
 }
 
-/* 头部动画 */
-.character .head {
-    transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.logo-container:hover .character .head {
-    transform: translateY(-5px);
-}
-
-/* 眼睛动画 - 悬停时眼睛向上看 */
-.character ellipse {
-    transition: transform 0.3s ease, cy 0.3s ease;
-}
-
-.logo-container:hover .character ellipse {
-    transform: translateY(-2px);
-}
-
-/* 嘴巴动画 - 悬停时变成微笑 */
-.character .mouth-sad {
-    transition: opacity 0.3s ease;
-}
-
-.character .mouth-happy {
-    transition: opacity 0.3s ease;
-}
-
-.logo-container:hover .character .mouth-sad {
-    opacity: 0;
-}
-
-.logo-container:hover .character .mouth-happy {
-    opacity: 1;
-}
+/* 移除子元素的单独动画，只保留整体放大效果 */
 
 #sidebar h1 {
     font-size: 1.5rem;
