@@ -7,27 +7,59 @@
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
-    <header>
+    <div id="sidebar">
         <h1>我的博客</h1>
         <nav>
             <a href="../index.html">首页</a>
             <a href="../about/index.html">关于</a>
-            <a href="index.html">归档</a>
+            <a href="index.html" class="active">归档</a>
             <a href="../categories/index.html">分类</a>
             <a href="../tags/index.html">标签</a>
         </nav>
-    </header>
+    </div>
     
-    <main>
-        <section>
-            <h2>文章归档</h2>
-            <p>这里将显示所有文章的归档列表...</p>
-        </section>
-    </main>
-    
-    <footer>
-        <p>&copy; 2025 我的博客</p>
-    </footer>
+    <div id="content">
+        <header>
+            <h1>文章归档</h1>
+            <p class="subtitle">按时间浏览所有文章</p>
+        </header>
+        
+        <main>
+            <section>
+                <h2>2025年</h2>
+                <div class="article-list">
+                    <article class="article-item">
+                        <h3><a href="../2025/12/12/antigravity-guide.html">如何使用 Antigravity：AI 驱动的 IDE 完全指南</a></h3>
+                        <div class="article-meta">
+                            <span>📅 2025-12-12</span>
+                            <span>🏷️ <a href="../tags/index.html">AI</a>, <a href="../tags/index.html">开发工具</a></span>
+                            <span>📁 <a href="../categories/index.html">技术</a></span>
+                        </div>
+                    </article>
+                    <article class="article-item">
+                        <h3><a href="../2025/12/12/project-refactoring-case.html">项目重构案例：从混乱到优雅的代码演进</a></h3>
+                        <div class="article-meta">
+                            <span>📅 2025-12-12</span>
+                            <span>🏷️ <a href="../tags/index.html">重构</a>, <a href="../tags/index.html">最佳实践</a></span>
+                            <span>📁 <a href="../categories/index.html">技术</a></span>
+                        </div>
+                    </article>
+                    <article class="article-item">
+                        <h3><a href="../2025/01/01/hello-world.html">欢迎来到我的博客</a></h3>
+                        <div class="article-meta">
+                            <span>📅 2025-01-01</span>
+                            <span>🏷️ <a href="../tags/index.html">示例</a></span>
+                            <span>📁 <a href="../categories/index.html">随笔</a></span>
+                        </div>
+                    </article>
+                </div>
+            </section>
+        </main>
+        
+        <footer>
+            <p>&copy; 2025 我的博客</p>
+        </footer>
+    </div>
     
     <script src="../js/main.js"></script>
 </body>

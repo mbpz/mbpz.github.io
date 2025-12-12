@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../../../css/style.css">
 </head>
 <body>
-    <header>
+    <div id="sidebar">
         <h1>我的博客</h1>
         <nav>
             <a href="../../../index.html">首页</a>
@@ -16,10 +16,16 @@
             <a href="../../../categories/index.html">分类</a>
             <a href="../../../tags/index.html">标签</a>
         </nav>
-    </header>
+    </div>
     
-    <main>
-        <article class="article-content">
+    <div id="content">
+        <header>
+            <h1>项目重构案例：从混乱到优雅的代码演进</h1>
+            <p class="subtitle">代码重构实战案例</p>
+        </header>
+        
+        <main>
+            <article class="article-content">
             <h1>项目重构案例：从混乱到优雅的代码演进</h1>
             <div class="article-meta">
                 <span>📅 2025-12-12</span>
@@ -172,12 +178,13 @@ print(calculate_area(triangle))   # 输出: 12.0</code></pre>
                 <h2>总结</h2>
                 <p>通过这个案例，我们看到了重构如何将混乱的代码转变为优雅、可维护的解决方案。重构不仅仅是代码的重新组织，更是对软件设计的深入思考。好的重构应该遵循设计原则，提高代码质量，同时保持功能不变。记住，重构是一个持续的过程，而不是一次性的任务。</p>
             </div>
-        </article>
-    </main>
-    
-    <footer>
-        <p>&copy; 2025 我的博客</p>
-    </footer>
+            </article>
+        </main>
+        
+        <footer>
+            <p>&copy; 2025 我的博客</p>
+        </footer>
+    </div>
     
     <script src="../../../js/main.js"></script>
 </body>

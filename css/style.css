@@ -12,44 +12,90 @@ body {
     background-color: #fff;
     min-height: 100vh;
     display: flex;
+    margin: 0;
+}
+
+/* 左侧导航栏 */
+#sidebar {
+    width: 250px;
+    background-color: #f8f9fa;
+    border-right: 1px solid #e9ecef;
+    padding: 2rem 1rem;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    position: fixed;
+    height: 100vh;
+    overflow-y: auto;
+    z-index: 100;
+}
+
+#sidebar h1 {
+    font-size: 1.5rem;
+    color: #212529;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #007bff;
+}
+
+#sidebar nav {
+    display: flex;
+    flex-direction: column;
+}
+
+#sidebar nav a {
+    display: block;
+    padding: 0.75rem 1rem;
+    margin: 0.25rem 0;
+    text-decoration: none;
+    color: #495057;
+    transition: all 0.3s;
+    font-weight: 500;
+    border-radius: 5px;
+}
+
+#sidebar nav a:hover {
+    background-color: #e9ecef;
+    color: #007bff;
+    transform: translateX(5px);
+}
+
+#sidebar nav a.active {
+    background-color: #007bff;
+    color: #fff;
+}
+
+/* 主内容区域 */
+#content {
+    flex: 1;
+    margin-left: 250px;
+    min-height: 100vh;
+    display: flex;
     flex-direction: column;
 }
 
 header {
-    background-color: #f8f9fa;
-    padding: 2rem 0;
-    text-align: center;
+    background-color: #fff;
+    padding: 2rem;
     border-bottom: 1px solid #e9ecef;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
 
 header h1 {
-    margin-bottom: 1rem;
     color: #212529;
     font-size: 2rem;
+    margin-bottom: 0.5rem;
 }
 
-nav {
-    margin-top: 1rem;
-}
-
-nav a {
-    margin: 0 1rem;
-    text-decoration: none;
-    color: #495057;
-    transition: color 0.3s;
-    font-weight: 500;
-}
-
-nav a:hover {
-    color: #007bff;
+header .subtitle {
+    color: #6c757d;
+    font-size: 1rem;
 }
 
 main {
     max-width: 1200px;
     margin: 2rem auto;
-    padding: 0 1rem;
+    padding: 0 2rem;
     flex: 1;
+    width: 100%;
 }
 
 section {
@@ -181,6 +227,14 @@ footer {
     color: #fff;
 }
 
+.tag:visited {
+    color: #495057;
+}
+
+.tag:hover:visited {
+    color: #fff;
+}
+
 /* 文章内容样式 */
 .article-content {
     background: #fff;
@@ -234,23 +288,50 @@ footer {
 
 /* 响应式设计 */
 @media (max-width: 768px) {
+    #sidebar {
+        width: 200px;
+    }
+    
+    #content {
+        margin-left: 200px;
+    }
+    
     header h1 {
         font-size: 1.5rem;
     }
     
-    nav a {
-        display: block;
-        margin: 0.5rem 0;
-    }
-    
     main {
-        padding: 0 0.5rem;
+        padding: 0 1rem;
     }
     
     .article-item,
     .category-item,
     .article-content {
         padding: 1rem;
+    }
+}
+
+@media (max-width: 600px) {
+    #sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        border-right: none;
+        border-bottom: 1px solid #e9ecef;
+    }
+    
+    #sidebar nav {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    
+    #sidebar nav a {
+        margin: 0.25rem;
+        padding: 0.5rem 0.75rem;
+    }
+    
+    #content {
+        margin-left: 0;
     }
 }
 
