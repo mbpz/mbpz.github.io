@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>项目重构案例：从混乱到优雅的代码演进 - 我的博客</title>
+    <link rel="stylesheet" href="../../../css/style.css">
+</head>
+<body>
+    <header>
+        <h1>我的博客</h1>
+        <nav>
+            <a href="../../../index.html">首页</a>
+            <a href="../../../about/index.html">关于</a>
+            <a href="../../../archives/index.html">归档</a>
+            <a href="../../../categories/index.html">分类</a>
+            <a href="../../../tags/index.html">标签</a>
+        </nav>
+    </header>
+    
+    <main>
+        <article class="article-content">
+            <h1>项目重构案例：从混乱到优雅的代码演进</h1>
+            <div class="article-meta">
+                <span>📅 2025-12-12</span>
+                <span>🏷️ <a href="../../../tags/index.html">重构</a>, <a href="../../../tags/index.html">最佳实践</a></span>
+                <span>📁 <a href="../../../categories/index.html">技术</a></span>
+            </div>
+            
+            <div style="margin-top: 2rem;">
+                <h2>重构概述</h2>
+                <p>代码重构是指在不改变软件外部行为的前提下，对代码进行优化，以提高其可读性、可维护性和性能。本文将通过一个实际案例，展示如何将混乱的代码重构为优雅、可维护的解决方案。</p>
+                
+                <h2>案例背景</h2>
+                <p>假设我们有一个计算不同形状面积的模块。原始代码使用大量的条件判断，代码冗长且难以扩展。让我们看看如何通过重构来改进它。</p>
+                
+                <h2>原始代码</h2>
+                <p>这是重构前的代码：</p>
+                <pre><code>def calculate_area(shape, dimensions):
+    if shape == 'rectangle':
+        return dimensions[0] * dimensions[1]
+    elif shape == 'circle':
+        return 3.14 * (dimensions[0] ** 2)
+    elif shape == 'triangle':
+        return 0.5 * dimensions[0] * dimensions[1]
+    elif shape == 'square':
+        return dimensions[0] ** 2
+    elif shape == 'trapezoid':
+        return 0.5 * (dimensions[0] + dimensions[1]) * dimensions[2]
+    else:
+        return None</code></pre>
+                
+                <h3>原始代码的问题</h3>
+                <ul>
+                    <li><strong>可读性差</strong>：使用魔法数字（3.14），没有明确的含义</li>
+                    <li><strong>可维护性低</strong>：添加新形状需要修改主函数，违反开闭原则</li>
+                    <li><strong>可扩展性差</strong>：所有逻辑集中在一个函数中，难以测试</li>
+                    <li><strong>类型不安全</strong>：使用元组传递参数，容易出错</li>
+                    <li><strong>精度问题</strong>：硬编码的 π 值不够精确</li>
+                </ul>
+                
+                <h2>重构后的代码</h2>
+                <p>经过重构，我们得到了更加优雅的解决方案：</p>
+                <pre><code>from math import pi
+from abc import ABC, abstractmethod
+
+class Shape(ABC):
+    """形状基类"""
+    @abstractmethod
+    def area(self) -> float:
+        """计算面积"""
+        pass
+
+class Rectangle(Shape):
+    """矩形"""
+    def __init__(self, width: float, height: float):
+        self.width = width
+        self.height = height
+    
+    def area(self) -> float:
+        return self.width * self.height
+
+class Circle(Shape):
+    """圆形"""
+    def __init__(self, radius: float):
+        self.radius = radius
+    
+    def area(self) -> float:
+        return pi * (self.radius ** 2)
+
+class Triangle(Shape):
+    """三角形"""
+    def __init__(self, base: float, height: float):
+        self.base = base
+        self.height = height
+    
+    def area(self) -> float:
+        return 0.5 * self.base * self.height
+
+class Square(Shape):
+    """正方形"""
+    def __init__(self, side: float):
+        self.side = side
+    
+    def area(self) -> float:
+        return self.side ** 2
+
+class Trapezoid(Shape):
+    """梯形"""
+    def __init__(self, base1: float, base2: float, height: float):
+        self.base1 = base1
+        self.base2 = base2
+        self.height = height
+    
+    def area(self) -> float:
+        return 0.5 * (self.base1 + self.base2) * self.height
+
+def calculate_area(shape: Shape) -> float:
+    """计算形状的面积"""
+    return shape.area()</code></pre>
+                
+                <h2>重构要点分析</h2>
+                
+                <h3>1. 使用面向对象设计</h3>
+                <p>通过抽象基类 <code>Shape</code> 定义接口，每个具体形状都实现自己的面积计算方法。这样做的好处：</p>
+                <ul>
+                    <li>符合单一职责原则：每个类只负责一种形状</li>
+                    <li>符合开闭原则：添加新形状不需要修改现有代码</li>
+                    <li>提高代码可读性：类名和属性名清晰表达意图</li>
+                </ul>
+                
+                <h3>2. 使用标准库常量</h3>
+                <p>从 <code>math</code> 模块导入 <code>pi</code> 常量，确保圆面积计算的精确性，避免硬编码魔法数字。</p>
+                
+                <h3>3. 类型注解</h3>
+                <p>使用类型注解（<code>float</code>, <code>Shape</code>）提高代码可读性和 IDE 支持，帮助开发者理解函数签名。</p>
+                
+                <h3>4. 函数简化</h3>
+                <p><code>calculate_area</code> 函数现在只需要调用形状对象的 <code>area</code> 方法，逻辑清晰简洁。</p>
+                
+                <h2>使用示例</h2>
+                <p>重构后的代码使用更加直观：</p>
+                <pre><code># 创建形状对象
+rectangle = Rectangle(5, 10)
+circle = Circle(3)
+triangle = Triangle(4, 6)
+
+# 计算面积
+print(calculate_area(rectangle))  # 输出: 50.0
+print(calculate_area(circle))     # 输出: 28.274...
+print(calculate_area(triangle))   # 输出: 12.0</code></pre>
+                
+                <h2>重构带来的好处</h2>
+                <ol>
+                    <li><strong>可读性提升</strong>：代码结构清晰，意图明确</li>
+                    <li><strong>可维护性增强</strong>：每个类独立，易于修改和测试</li>
+                    <li><strong>可扩展性提高</strong>：添加新形状只需创建新类，无需修改现有代码</li>
+                    <li><strong>类型安全</strong>：使用类型注解和明确的构造函数参数</li>
+                    <li><strong>易于测试</strong>：每个类可以独立进行单元测试</li>
+                    <li><strong>符合设计原则</strong>：遵循 SOLID 原则，代码质量更高</li>
+                </ol>
+                
+                <h2>重构最佳实践</h2>
+                <ul>
+                    <li><strong>小步重构</strong>：每次只重构一小部分，确保系统始终可运行</li>
+                    <li><strong>保持测试</strong>：重构前后行为应该完全一致</li>
+                    <li><strong>代码审查</strong>：让团队成员审查重构后的代码</li>
+                    <li><strong>文档更新</strong>：及时更新相关文档和注释</li>
+                    <li><strong>性能考虑</strong>：确保重构不会带来性能问题</li>
+                </ul>
+                
+                <h2>总结</h2>
+                <p>通过这个案例，我们看到了重构如何将混乱的代码转变为优雅、可维护的解决方案。重构不仅仅是代码的重新组织，更是对软件设计的深入思考。好的重构应该遵循设计原则，提高代码质量，同时保持功能不变。记住，重构是一个持续的过程，而不是一次性的任务。</p>
+            </div>
+        </article>
+    </main>
+    
+    <footer>
+        <p>&copy; 2025 我的博客</p>
+    </footer>
+    
+    <script src="../../../js/main.js"></script>
+</body>
+</html>
+
