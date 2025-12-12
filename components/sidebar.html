@@ -1,0 +1,42 @@
+<div id="sidebar">
+    <div class="logo-container">
+        <svg class="logo-window" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+            <!-- 科技蓝圆形窗口背景 -->
+            <circle class="window-bg" cx="60" cy="60" r="55" fill="#1e3a8a" />
+            <circle class="window-inner" cx="60" cy="60" r="50" fill="#3b82f6" />
+            
+            <!-- 窗口边框效果 -->
+            <circle class="window-border" cx="60" cy="60" r="52" fill="none" stroke="#60a5fa" stroke-width="2" opacity="0.5" />
+            
+            <!-- Emo科技人卡通 - 初始状态（在窗口内） -->
+            <g class="character" transform="translate(60, 75)">
+                <!-- 身体 -->
+                <rect x="-15" y="5" width="30" height="25" rx="5" fill="#4a5568" />
+                <!-- 头部 -->
+                <circle class="head" cx="0" cy="0" r="18" fill="#2d3748" />
+                <!-- 眼睛（emo风格，向下看） -->
+                <ellipse cx="-6" cy="-3" rx="3" ry="4" fill="#fff" />
+                <ellipse cx="6" cy="-3" rx="3" ry="4" fill="#fff" />
+                <!-- 嘴巴（emo风格，向下弯曲） -->
+                <path class="mouth-sad" d="M -8 3 Q 0 1 8 3" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" />
+                <!-- 嘴巴（微笑，向上弯曲） -->
+                <path class="mouth-happy" d="M -8 3 Q 0 7 8 3" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" opacity="0" />
+                <!-- 科技元素 - 天线 -->
+                <line x1="0" y1="-18" x2="0" y2="-25" stroke="#ff6b6b" stroke-width="2" stroke-linecap="round" />
+                <circle cx="0" cy="-25" r="2" fill="#ff6b6b" />
+            </g>
+            
+            <!-- 红色外圈 -->
+            <circle class="red-circle" cx="60" cy="60" r="58" fill="none" stroke="#dc2626" stroke-width="4" />
+        </svg>
+    </div>
+    <h1>我的博客</h1>
+    <nav id="sidebar-nav">
+        <a href="#" data-page="index.html">首页</a>
+        <a href="#" data-page="about/index.html">关于</a>
+        <a href="#" data-page="archives/index.html">归档</a>
+        <a href="#" data-page="categories/index.html">分类</a>
+        <a href="#" data-page="tags/index.html">标签</a>
+    </nav>
+</div>
+
